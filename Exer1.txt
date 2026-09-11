@@ -1,0 +1,84 @@
+using Herancaa;
+
+namespace Herancaa
+
+{
+
+    internal class Program
+    {
+
+        static void Main(string[] args)
+
+        {
+
+            Cachorro cachorro = new Cachorro();
+
+            cachorro.Nome = "Panterinha";
+
+
+            Gato gato = new Gato { Nome = "Cristalzinha" };
+
+
+
+            Console.WriteLine($"Nome do cachorro: {cachorro.Nome}");
+
+
+            cachorro.comer();
+
+
+            cachorro.Latir();
+
+
+
+            Console.WriteLine();
+
+
+
+            Console.WriteLine($"Nome do gato: {gato.Nome}");
+
+
+            gato.comer();
+
+
+            gato.Miar();
+
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Herancaa
+{
+    public class Animal
+    {
+        public string Nome { get; set; }
+        public void comer()
+        {
+            Console.WriteLine($"{Nome} está comendo.");
+
+        }
+    }
+
+}
+namespace Herancaa
+{
+    public class Cachorro
+    {
+        public void latir()
+        {
+            Console.WriteLine($"AU AU");
+        }
+    }
+}
+namespace Herancaa
+{
+    public class Gato : Animal 
+    {
+        public void miar()
+        {
+            Console.WriteLine($"MIAU MIAU");
+        }
+    }
+}
