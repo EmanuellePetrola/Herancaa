@@ -1,0 +1,121 @@
+class Personagem
+{
+    public string Nome { get; set; }
+    public int PontosDeVida { get; set; }
+    public int ForcaDeAtaque { get; set; }
+
+    public Personagem(string nome, int pontosDeVida, int forcaDeAtaque)
+    {
+        Nome = nome;
+        PontosDeVida = pontosDeVida;
+        ForcaDeAtaque = forcaDeAtaque;
+    }
+
+    public virtual void Atacar(Personagem alvo)
+    {
+        alvo.PontosDeVida -= ForcaDeAtaque;
+
+        if (alvo.PontosDeVida < 0)
+        {
+            alvo.PontosDeVida = 0;
+        }
+
+        Console.WriteLine($"{Nome} causou {ForcaDeAtaque} de dano em {alvo.Nome}.");
+        Console.WriteLine($"{alvo.Nome} ficou com {alvo.PontosDeVida} PV.");
+    }
+
+    public bool EstaVivo()
+    {
+        return PontosDeVida > 0;
+    }
+}
+
+class Guerreiro : Personagem
+{
+    public int Defesa { get; set; }
+
+    public Guerreiro(string nome, int pontosDeVida, int forcaDeAtaque, int defesa)
+        : base(nome, pontosDeVida, forcaDeAtaque)
+    {
+        Defesa = defesa;
+    }
+
+    public override void Atacar(Personagem alvo)
+    {
+        int dano = (int)(ForcaDeAtaque * 1.2);
+
+        alvo.PontosDeVida -= dano;
+
+        if (alvo.PontosDeVida < 0)
+        {
+            alvo.PontosDeVida = 0;
+        }
+
+        Console.WriteLine($"{Nome} causou {dano} de dano em {alvo.Nome}.");
+        Console.WriteLine($"{alvo.Nome} ficou com {alvo.PontosDeVida} PV.");
+    }
+}
+
+class Mago : Personagem
+{
+    public int PontosDeMagia { get; set; }
+
+    public Mago(string nome, int pontosDeVida, int forcaDeAtaque, int pontosDeMagia)
+        : base(nome, pontosDeVida, forcaDeAtaque)
+    {
+        PontosDeMagia = pontosDeMagia;
+    }
+
+    public override void Atacar(Personagem alvo)
+    {
+        int dano = ForcaDeAtaque;
+
+        alvo.PontosDeVida -= dano;
+
+        if (alvo.PontosDeVida < 0)
+        {
+            alvo.PontosDeVida = 0;
+        }
+
+        int recuperacao = (int)(dano * 0.1);
+        PontosDeMagia += recuperacao;
+
+        Console.WriteLine($"{Nome} causou {dano} de dano em {alvo.Nome}.");
+        Console.WriteLine($"{alvo.Nome} ficou com {alvo.PontosDeVida} PV.");
+        Console.WriteLine($"{Nome} recuperou {recuperacao} MP.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Guerreiro guerreiro = new Guerreiro("Guerreiro", 100, 20, 10);
+        Mago mago = new Mago("Mago", 100, 18, 50);
+
+        while (guerreiro.EstaVivo() && mago.EstaVivo())
+        {
+            Console.WriteLine("\n--- TURNO DO GUERREIRO ---");
+            guerreiro.Atacar(mago);
+
+            if (!mago.EstaVivo())
+            {
+                break;
+            }
+
+            Console.WriteLine("\n--- TURNO DO MAGO ---");
+            mago.Atacar(guerreiro);
+        }
+
+        Console.WriteLine("\n--- FIM DA BATALHA ---");
+
+        if (guerreiro.EstaVivo())
+        {
+            Console.WriteLine($"Vencedor: {guerreiro.Nome}");
+        }
+        else
+        {
+            Console.WriteLine($"Vencedor: {mago.Nome}");
+        }
+    }
+}
