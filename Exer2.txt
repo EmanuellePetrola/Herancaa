@@ -1,0 +1,112 @@
+public class Funcionario
+{
+    public string Nome { get; set; }
+    public double Salario { get; set; }
+
+    public virtual double CalcularBonusAnual()
+    {
+        return Salario * 0.10;
+    }
+}
+
+public class Gerente : Funcionario
+{
+    public override double CalcularBonusAnual()
+    {
+        return (Salario * 0.15) + 1000;
+    }
+}
+
+public class Desenvolvedor : Funcionario
+{
+    public override double CalcularBonusAnual()
+    {
+        return Salario * 0.12;
+    }
+}
+
+Funcionario funcionario = new Funcionario();
+funcionario.Nome = "Helena";
+funcionario.Salario = 3000;
+
+Gerente gerente = new Gerente();
+gerente.Nome = "Flávia";
+gerente.Salario = 5000;
+
+Desenvolvedor desenvolvedor = new Desenvolvedor();
+desenvolvedor.Nome = "Marcos";
+desenvolvedor.Salario = 4000;
+
+Console.WriteLine($"Bônus do funcionário: R$ {funcionario.CalcularBonusAnual():F2}");
+Console.WriteLine($"Bônus do gerente: R$ {gerente.CalcularBonusAnual():F2}");
+Console.WriteLine($"Bônus do desenvolvedor: R$ {desenvolvedor.CalcularBonusAnual():F2}");
+
+using System.Text;
+
+namespace Herancaa
+{
+    public class Funcionario
+    {
+            public string Nome { get; set; }
+
+            public double Salario { get; set; }
+
+
+            public virtual double CalcularBonusAnual()
+
+            {
+
+                return Salario * 0.10;
+
+            }
+
+        }
+
+    }
+    using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Herancaa
+{
+        public class Gerente : Funcionario
+
+        {
+
+            public override double CalcularBonusAnual()
+
+            {
+
+                return (Salario * 0.15) + 1000;
+
+            }
+
+        }
+
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Herancaa
+{
+    {
+        public class Desenvolvedor : Funcionario
+
+        {
+
+            public override double CalcularBonusAnual()
+
+            {
+
+                return Salario * 0.12;
+
+            }
+
+        }
+
+
+    }
+}
+

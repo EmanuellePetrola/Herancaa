@@ -4,7 +4,23 @@ using System.Text;
 
 namespace Herancaa
 {
-    internal class Funcionario
+    public class Funcionario
     {
+            public string Nome { get; set; }
+
+            public double Salario { get; set; }
+
+
+            public virtual double CalcularBonusAnual()
+
+            {
+
+                return Salario * 0.10;
+
+            }
+
+        }
+
     }
-}
+
+
