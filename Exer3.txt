@@ -1,0 +1,36 @@
+public abstract class FormaGeometrica
+    {
+        public abstract double CalcularArea();
+    }
+
+public class Retangulo : FormaGeometrica
+    {
+        public double Largura { get; set; }
+        public double Altura { get; set; }
+
+        public override double CalcularArea()
+        {
+            return Largura * Altura;
+        }
+    }
+
+public class Circulo : FormaGeometrica
+    {
+        public double Raio { get; set; }
+
+        public override double CalcularArea()
+        {
+            return Math.PI * Raio * Raio;
+        }
+    }
+
+Retangulo retangulo = new Retangulo();
+            retangulo.Largura = 20;
+            retangulo.Altura = 8;
+
+            Circulo circulo = new Circulo();
+            circulo.Raio = 3;
+
+            Console.WriteLine($"Área do retângulo: {retangulo.CalcularArea():F2}");
+            Console.WriteLine($"Área do círculo: {circulo.CalcularArea():F2}");
+ 
